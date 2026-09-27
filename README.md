@@ -7,7 +7,7 @@ Trinket is a lightweight Windows desktop utility — not a game, not a backgroun
 ## Features
 
 - **Real rope physics** — a multi-node rope simulated with Verlet integration, not a looping animation. Drag it, throw it, watch it settle.
-- **25 built-in charms** — moon, star, sunflower, evil eye, cherries, cat, and many more, each with original hand-drawn vector artwork.
+- **24 built-in charms** — moon, star, sunflower, evil eye, cherries, cat, and many more, each with original hand-drawn vector artwork.
 - **Custom charm import** — bring in your own PNG/WebP image and mark exactly where the cord should attach.
 - **Charm Studio** — customize the cord style, color, and length; choose beads; pick where the charm hangs.
 - **Click reactions** — sparkle, wiggle, spin, pulse, or bounce, depending on the charm.
