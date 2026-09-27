@@ -20,13 +20,13 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore Trinket.sln
+        run: dotnet restore Trinket.slnx
 
       - name: Build
-        run: dotnet build Trinket.sln --configuration Release --no-restore
+        run: dotnet build Trinket.slnx --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test Trinket.sln --configuration Release --no-build
+        run: dotnet test Trinket.slnx --configuration Release --no-build
 
       - name: Publish self-contained build
         run: dotnet publish Trinket/Trinket.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
