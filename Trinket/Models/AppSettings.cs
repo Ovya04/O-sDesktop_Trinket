@@ -12,6 +12,8 @@ public class AppSettings
 
     public double RopeLength { get; set; } = 220.0;
 
+        /// <summary>Null = use the selected charm's default color. Reset whenever the charm selection changes.</summary>
+    public string? CharmColorHex { get; set; } = null;
     public AnchorPreset AnchorPreset { get; set; } = AnchorPreset.TopRight;
 
         public string InitialLetter { get; set; } = "T";

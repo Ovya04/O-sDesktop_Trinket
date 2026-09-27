@@ -19,6 +19,18 @@
                                   SelectionChanged="CharmCombo_SelectionChanged" Margin="0,0,0,12" />
 
                         <TextBlock Text="Size" FontSize="12" Foreground="#888" Margin="0,0,0,4" />
+                                                                       <StackPanel x:Name="CharmColorSection" Visibility="Collapsed">
+                            <TextBlock Text="Initial Color" FontSize="11" Foreground="#888" Margin="0,0,0,6" />
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                <Button Width="24" Height="24" Margin="0,0,6,0" Background="#F4A9B8" Tag="#FFF4A9B8" Click="CharmColorSwatch_Click" />
+                                <Button Width="24" Height="24" Margin="0,0,6,0" Background="#A8C3A0" Tag="#FFA8C3A0" Click="CharmColorSwatch_Click" />
+                                <Button Width="24" Height="24" Margin="0,0,6,0" Background="#E0B25C" Tag="#FFE0B25C" Click="CharmColorSwatch_Click" />
+                                <Button Width="24" Height="24" Margin="0,0,6,0" Background="#4A9AD4" Tag="#FF4A9AD4" Click="CharmColorSwatch_Click" />
+                                <Button Width="24" Height="24" Margin="0,0,10,0" Background="#B9A6D9" Tag="#FFB9A6D9" Click="CharmColorSwatch_Click" />
+                                <Button Content="Custom..." Padding="8,2" Margin="0,0,6,0" Click="CustomCharmColorButton_Click" />
+                                <Button Content="Default" Padding="8,2" Click="ResetCharmColor_Click" />
+                            </StackPanel>
+                        </StackPanel>
                         <Slider x:Name="CharmSizeSlider" Minimum="30" Maximum="120"
                                 ValueChanged="CharmSizeSlider_ValueChanged" Margin="0,0,0,12" />
 

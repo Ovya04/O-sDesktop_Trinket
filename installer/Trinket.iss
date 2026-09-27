@@ -4,7 +4,7 @@
 ; upgrades/uninstalls of the same app.
 #define MyAppId "{{8F2C1A4E-3B7D-4E9A-9C5F-1D2E3F4A5B6C}"
 #define MyAppName "Trinket"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "Independent"
 #define MyAppExeName "Trinket.exe"
 

@@ -41,6 +41,7 @@ public partial class CharmOverlayWindow : Window
     private string _currentInitialLetter;
     private BeadShape _currentBeadShape;
     private AnchorPreset _currentAnchorPreset;
+       private Color? _currentCharmColorOverride;
     private CharmDefinition _currentCharmDefinition = null!;
 
     private FrameworkElement _charmVisual = null!;
@@ -99,7 +100,9 @@ public partial class CharmOverlayWindow : Window
         _currentMouseBreeze = settings.MouseBreeze;
         _currentAmbientBreeze = settings.AmbientBreeze;
         _ambientBreezeScheduler = new AmbientBreezeScheduler(_physicsSettings);
-
+             _currentCharmColorOverride = string.IsNullOrEmpty(settings.CharmColorHex)
+            ? null
+            : (Color)ColorConverter.ConvertFromString(settings.CharmColorHex);
         _allCharms = CharmRegistry.All.ToList();
         foreach (ImportedCharmMetadata metadata in AssetService.LoadMetadata())
         {
@@ -200,6 +203,8 @@ public partial class CharmOverlayWindow : Window
             _studioWindow.RopeLengthChanged += SetRopeLength;
             _studioWindow.CharmSelected += SetCharm;
             _studioWindow.CharmSizeChanged += SetCharmSize;
+                        _studioWindow.CharmColorChanged += SetCharmColor;
+            _studioWindow.CharmColorResetRequested += ResetCharmColor;
             _studioWindow.InitialLetterChanged += SetInitialLetter;
             _studioWindow.BeadShapeChanged += SetBeadShape;
             _studioWindow.AnchorPresetChanged += SetAnchorPreset;
@@ -264,15 +269,27 @@ public partial class CharmOverlayWindow : Window
         PersistSettings();
     }
 
-    public void SetCharm(string charmId)
+        public void SetCharm(string charmId)
     {
         _currentCharmId = charmId;
+        _currentCharmColorOverride = null; // switching charms resets to that charm's default color
         RebuildCharmVisual();
     }
 
     public void SetCharmSize(double size)
     {
         _currentCharmSize = size;
+        RebuildCharmVisual();
+    }
+        public void SetCharmColor(Color color)
+    {
+        _currentCharmColorOverride = color;
+        RebuildCharmVisual();
+    }
+
+    public void ResetCharmColor()
+    {
+        _currentCharmColorOverride = null;
         RebuildCharmVisual();
     }
 
@@ -344,14 +361,16 @@ public partial class CharmOverlayWindow : Window
     {
         CharmDefinition baseDefinition = _allCharms.FirstOrDefault(c => c.Id == id) ?? _allCharms[0];
 
-        return new CharmDefinition
+                return new CharmDefinition
         {
             Id = baseDefinition.Id,
             Name = baseDefinition.Name,
             Shape = baseDefinition.Shape,
             Size = size,
-            FillColor = baseDefinition.FillColor,
-            StrokeColor = baseDefinition.StrokeColor,
+            FillColor = _currentCharmColorOverride ?? baseDefinition.FillColor,
+            StrokeColor = _currentCharmColorOverride.HasValue
+                ? Color.FromArgb(255, (byte)(_currentCharmColorOverride.Value.R * 0.75), (byte)(_currentCharmColorOverride.Value.G * 0.75), (byte)(_currentCharmColorOverride.Value.B * 0.75))
+                : baseDefinition.StrokeColor,
             Reaction = baseDefinition.Reaction,
             ImagePath = baseDefinition.ImagePath,
             AttachmentPoint = baseDefinition.AttachmentPoint,
@@ -504,6 +523,7 @@ public partial class CharmOverlayWindow : Window
             CharmId = _currentCharmId,
             CharmSize = _currentCharmSize,
             InitialLetter = _currentInitialLetter,
+            
             CordStyle = _currentCordStyle,
             CordColorHex = _currentCordColor.ToString(),
             BeadShape = _currentBeadShape,

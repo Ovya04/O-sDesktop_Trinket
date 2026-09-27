@@ -18,6 +18,8 @@ public partial class CharmStudioWindow : Window
     private readonly List<CharmDefinition> _allCharms;
     private readonly List<TrinketDefinition> _trinkets;
 
+        public event Action<Color>? CharmColorChanged;
+    public event Action? CharmColorResetRequested;
     public event Action<CordStyle>? CordStyleChanged;
     public event Action<Color>? CordColorChanged;
     public event Action<double>? RopeLengthChanged;
@@ -70,6 +72,7 @@ public partial class CharmStudioWindow : Window
                 MonitorCombo.SelectedItem = item;
             }
         }
+                UpdateCharmColorSectionVisibility();
 
         _isInitializing = false;
     }
@@ -80,6 +83,34 @@ public partial class CharmStudioWindow : Window
         TrinketsCombo.ItemsSource = _trinkets;
         if (selectTrinket != null) TrinketsCombo.SelectedItem = selectTrinket;
     }
+        private void CharmColorSwatch_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement el && el.Tag is string hex)
+        {
+            CharmColorChanged?.Invoke((Color)ColorConverter.ConvertFromString(hex));
+        }
+    }
+
+    private void CustomCharmColorButton_Click(object sender, RoutedEventArgs e)
+    {
+        using var dialog = new ColorDialog { FullOpen = true };
+        if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        {
+            System.Drawing.Color picked = dialog.Color;
+            CharmColorChanged?.Invoke(Color.FromArgb(picked.A, picked.R, picked.G, picked.B));
+        }
+    }
+        private void UpdateCharmColorSectionVisibility()
+    {
+        CharmColorSection.Visibility = (CharmCombo.SelectedItem is CharmDefinition cd && cd.Shape == CharmShape.Initial)
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+    }
+
+    private void ResetCharmColor_Click(object sender, RoutedEventArgs e)
+    {
+        CharmColorResetRequested?.Invoke();
+    }
 
     public void RefreshCharmCombo(CharmDefinition selectCharm)
     {
@@ -87,6 +118,7 @@ public partial class CharmStudioWindow : Window
         CharmCombo.ItemsSource = _allCharms;
         _isInitializing = true;
         CharmCombo.SelectedItem = selectCharm;
+                UpdateCharmColorSectionVisibility();
         _isInitializing = false;
     }
 
@@ -100,6 +132,7 @@ public partial class CharmStudioWindow : Window
         CordLengthSlider.Value = settings.RopeLength;
         BeadsCombo.SelectedIndex = (int)settings.BeadShape;
         AnchorCombo.SelectedIndex = (int)settings.AnchorPreset;
+                UpdateCharmColorSectionVisibility();
         _isInitializing = false;
     }
 
@@ -115,10 +148,11 @@ public partial class CharmStudioWindow : Window
         if (TrinketsCombo.SelectedItem is TrinketDefinition selected) TrinketDeleteRequested?.Invoke(selected);
     }
 
-    private void CharmCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CharmCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_isInitializing) return;
         if (CharmCombo.SelectedItem is CharmDefinition selected) CharmSelected?.Invoke(selected.Id);
+        UpdateCharmColorSectionVisibility();
     }
 
     private void CharmSizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

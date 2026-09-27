@@ -6,7 +6,7 @@ namespace Trinket.Models;
 
 public enum CharmShape
 {
-    Moon, Star, Heart, Sunflower, EvilEye, Strawberry, Cherries,
+    Moon, Star, Heart, Sunflower, EvilEye, Cherries,
     Cloud, Saturn, Mushroom, Cat, Rainbow, DiscoBall, Paw,
     Bow, TeddyBear, Daisy, CoffeeCup, GraduationCap, Initial,
     Custom
@@ -21,7 +21,6 @@ public static class CharmRegistry
         new() { Id = "heart",      Name = "Heart",          Shape = CharmShape.Heart,         FillColor = Color.FromRgb(0xF2, 0x9C, 0xAE), StrokeColor = Color.FromRgb(0xC9, 0x6A, 0x80), Reaction = CharmReactionType.Bounce },
         new() { Id = "sunflower",  Name = "Sunflower",      Shape = CharmShape.Sunflower,     FillColor = Color.FromRgb(0xF4, 0xC5, 0x4D), StrokeColor = Color.FromRgb(0xC9, 0x9A, 0x2A), Reaction = CharmReactionType.Wiggle },
         new() { Id = "evil-eye",   Name = "Evil Eye",       Shape = CharmShape.EvilEye,       FillColor = Color.FromRgb(0x2E, 0x5E, 0x9A), StrokeColor = Color.FromRgb(0x1B, 0x3A, 0x60), Reaction = CharmReactionType.Pulse },
-        new() { Id = "strawberry", Name = "Strawberry",     Shape = CharmShape.Strawberry,    FillColor = Color.FromRgb(0xE0, 0x4F, 0x5F), StrokeColor = Color.FromRgb(0xB0, 0x30, 0x40), Reaction = CharmReactionType.Bounce },
         new() { Id = "cherries",   Name = "Cherries",       Shape = CharmShape.Cherries,      FillColor = Color.FromRgb(0xC5, 0x2B, 0x3A), StrokeColor = Color.FromRgb(0x8E, 0x1B, 0x28), Reaction = CharmReactionType.Wiggle },
         new() { Id = "cloud",      Name = "Cloud",          Shape = CharmShape.Cloud,         FillColor = Color.FromRgb(0xF3, 0xF6, 0xFA), StrokeColor = Color.FromRgb(0xC7, 0xD2, 0xE0), Reaction = CharmReactionType.Wiggle },
         new() { Id = "saturn",     Name = "Saturn",         Shape = CharmShape.Saturn,        FillColor = Color.FromRgb(0xE8, 0xC3, 0x8A), StrokeColor = Color.FromRgb(0xB8, 0x8F, 0x54), Reaction = CharmReactionType.Spin },
