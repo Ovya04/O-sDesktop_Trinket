@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+      <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Product>Trinket</Product>
+    <Company>Independent</Company>
+    <Description>A small desktop ornament that hangs from the top edge of your screen.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- UseWindowsForms implicitly adds global usings for System.Drawing and
+         System.Windows.Forms across the WHOLE project. Since WPF (System.Windows)
+         defines colliding type names (Point, Color, Application, MouseEventArgs,
+         Brush, etc.), this causes ambiguous-reference errors everywhere, not just
+         in TrayService.cs. Removing these implicit usings forces every file to be
+         explicit - TrayService.cs already has its own explicit
+         "using System.Drawing;" and "using System.Windows.Forms;" lines, so it's
+         unaffected by this removal. -->
+    <Using Remove="System.Drawing" />
+    <Using Remove="System.Windows.Forms" />
+  </ItemGroup>
+</Project>

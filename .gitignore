@@ -1,0 +1,19 @@
+# .NET generated files
+bin/
+obj/
+
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Published application
+/publish/
+
+# Generated installer
+/installer/output/
+
+# Debug files
+*.pdb
+*.log

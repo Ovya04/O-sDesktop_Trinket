@@ -1,0 +1,23 @@
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+
+# .NET build files
+**/bin/
+**/obj/
+
+# Published application
+/publish/
+**/publish/
+
+# Generated installers
+/installer/output/
+
+# Debug files
+*.pdb
+*.log
+
+# Temporary files
+*.tmp

@@ -1,0 +1,24 @@
+<Window x:Class="Trinket.Overlay.CharmOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Trinket"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True"
+        ResizeMode="NoResize"
+        WindowStartupLocation="Manual"
+        Left="0" Top="0"
+        Loaded="Window_Loaded"
+        Closed="CharmOverlayWindow_Closed">
+
+    <Canvas x:Name="OverlayCanvas" Background="Transparent">
+
+        <Polyline x:Name="RopePolyline" />
+                <Canvas x:Name="CordDecorationCanvas" />
+
+        
+
+    </Canvas>
+</Window>

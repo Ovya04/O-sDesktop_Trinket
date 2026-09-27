@@ -1,0 +1,28 @@
+<Window x:Class="Trinket.Studio.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="About Trinket"
+        Width="360" Height="320"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#FAF7F2">
+    <StackPanel Margin="24">
+        <TextBlock Text="Trinket" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center" />
+        <TextBlock x:Name="VersionText" FontSize="12" Foreground="#888"
+                   HorizontalAlignment="Center" Margin="0,4,0,16" />
+
+        <TextBlock Text="A tiny collection of physical trinkets that live on the edge of your desktop."
+                   TextWrapping="Wrap" TextAlignment="Center" Margin="0,0,0,16" />
+
+        <TextBlock Text="No accounts. No telemetry. No internet calls."
+                   FontWeight="SemiBold" TextAlignment="Center" Margin="0,0,0,4" />
+        <TextBlock Text="Everything stays on your device."
+                   TextAlignment="Center" Foreground="#888" Margin="0,0,0,16" />
+
+        <TextBlock Text="An original, independent project."
+                   TextAlignment="Center" Foreground="#888" FontSize="11" />
+
+        <Button Content="Close" Padding="14,5" HorizontalAlignment="Center"
+                Margin="0,20,0,0" Click="Close_Click" />
+    </StackPanel>
+</Window>

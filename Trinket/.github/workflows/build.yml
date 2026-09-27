@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore Trinket.sln
+
+      - name: Build
+        run: dotnet build Trinket.sln --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test Trinket.sln --configuration Release --no-build
+
+      - name: Publish self-contained build
+        run: dotnet publish Trinket/Trinket.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Trinket-win-x64
+          path: publish/Trinket.exe
